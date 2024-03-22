@@ -31,7 +31,6 @@ DEVICE = "cuda:0" if torch.cuda.is_available() else "cpu"
 # Set your Hugging Face API token here
 # Set your Hugging Face API token here
 hugging_face_api_token = os.environ.get("HF_API_TOKEN")
-print(hugging_face_api_token)
 
 # Save the Hugging Face API token
 HfFolder.save_token(hugging_face_api_token)
@@ -110,12 +109,15 @@ def create_model_and_tokenizer():
       bnb_4bit_compute_dtype=torch.float16
   )
 
+  print(hugging_face_api_token)
+
   model = AutoModelForCausalLM.from_pretrained(
       model_name,
       use_safetensors=True,
       quantization_config=bnb_config,
       trust_remote_code=True,
-      device_map="auto"
+      device_map="auto",
+      token=hugging_face_api_token
   )
 
 
