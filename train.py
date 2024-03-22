@@ -116,12 +116,11 @@ def create_model_and_tokenizer():
       use_safetensors=True,
       quantization_config=bnb_config,
       trust_remote_code=True,
-      device_map="auto",
-      token=hugging_face_api_token
+      device_map="auto"
   )
 
 
-  tokenizer = AutoTokenizer.from_pretrained(model_name, token=hugging_face_api_token)
+  tokenizer = AutoTokenizer.from_pretrained(model_name)
   tokenizer.pad_token = tokenizer.eos_token
   tokenizer.padding_side = "right"
 
