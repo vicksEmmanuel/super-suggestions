@@ -1,16 +1,4 @@
-# !nvidia-smi
-
-# %%
-# !pip install -Uqqq pip --progress-bar off
-# !pip install -qqq  torch==2.0.1 --progress-bar off
-# !pip install -qqq  transformers==4.32.1 --progress-bar off
-# !pip install -qqq  datasets==2.14.4 --progress-bar off
-# !pip install -qqq  bitsandbytes==0.41.1 --progress-bar off
-# !pip install -qqq  peft==0.5.0 --progress-bar off
-# !pip install -qqq  trl==0.7.1 --progress-bar off
-# !pip install accelerate
-# !pip install -i https://test.pypi.org/simple/bitsandbytes
-
+# !nvidia-smi TODO Add this to subprocess
 
 # %% 
 
@@ -43,12 +31,13 @@ DEVICE = "cuda:0" if torch.cuda.is_available() else "cpu"
 # Set your Hugging Face API token here
 # Set your Hugging Face API token here
 hugging_face_api_token = os.environ.get("HF_API_TOKEN")
+print(hugging_face_api_token)
 
 # Save the Hugging Face API token
 HfFolder.save_token(hugging_face_api_token)
 
-# Save the Hugging Face API token
-HfFolder.save_token(hugging_face_api_token)
+# # Save the Hugging Face API token
+# HfFolder.save_token(hugging_face_api_token)
 
 
 # %%
@@ -61,7 +50,8 @@ Below is a conversation between a human and an AI agent. Write a summary of the 
 """.strip()
 
 
-dataset =  load_dataset("vicksemmanuel/Code-Snippet")
+# dataset =  load_dataset("vicksemmanuel/Code-Snippet")
+dataset = load_from_disk(dataset_path='llm_data/dataset')
 dataset
 
 

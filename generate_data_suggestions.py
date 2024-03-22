@@ -34,8 +34,9 @@ with open(filename, mode="r") as file:
 
 # %%
 for repo in repositories:
+    modify_https = repo.replace(":","_",1)
     try:
-        Repo.clone_from(repo, to_path=f"{repo_path}/{repo}")
+        Repo.clone_from(repo, to_path=f"{repo_path}/{modify_https}")
     except Exception as e:
         print(f"An error occurred: {e}")
 
@@ -178,7 +179,8 @@ def createDataset(splitNumber, spaceNumber, indexValue):
 
     data_path = f"llm_data/output_file_{indexValue}.csv"
 
-    with open(data_path, "w", newline="") as csvfile:
+    with open(data_path, "w", newline="", encoding="utf-8") as csvfile:
+        print(data_path)
         csvwriter = csv.DictWriter(csvfile, fieldnames=["INPUT", "OUTPUT"])
         csvwriter.writeheader()
 

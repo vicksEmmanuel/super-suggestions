@@ -1,1 +1,4 @@
 .env
+repositories/*
+codebases/*
+llm_data/*

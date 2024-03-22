@@ -13,7 +13,7 @@ repositories = []
 # %%
 
 for i in range(0, number_of_files):
-    with open(f"{filename}_{i}.csv", mode="r") as file:
+    with open(f"{filename}_{i}.csv", mode="r", encoding="utf-8") as file:
         csv_reader = csv.reader(file)
         header = next(csv_reader)
         for row in csv_reader:
@@ -26,29 +26,29 @@ df = pd.DataFrame(repositories)
 train_df, temp_df = train_test_split(df, test_size=0.2, random_state=42)
 valid_df, test_df = train_test_split(temp_df, test_size=0.5, random_state=42)
 
-# # Create Dataset objects for each subset
-# train_dataset = Dataset.from_pandas(train_df)
-# valid_dataset = Dataset.from_pandas(valid_df)
-# test_dataset = Dataset.from_pandas(test_df)
+# Create Dataset objects for each subset
+train_dataset = Dataset.from_pandas(train_df)
+valid_dataset = Dataset.from_pandas(valid_df)
+test_dataset = Dataset.from_pandas(test_df)
 
-# # Create a DatasetDict to hold the Dataset objects
-# dataset_dict = DatasetDict(
-#     {"train": train_dataset, "validation": valid_dataset, "test": test_dataset}
-# )
+# Create a DatasetDict to hold the Dataset objects
+dataset_dict = DatasetDict(
+    {"train": train_dataset, "validation": valid_dataset, "test": test_dataset}
+)
 
-# print(dataset_dict)
+print(dataset_dict)
 
 
-# # %%
-# dataset_dict.save_to_disk("llm_data/dataset")
+# %%
+dataset_dict.save_to_disk("llm_data/dataset")
 
 # %%
 
 print("Saving to csv")
 
-train_df.to_csv("llm_data/train.csv", index=False)
-valid_df.to_csv("llm_data/validation.csv", index=False)
-test_df.to_csv("llm_data/test.csv", index=False)
+# train_df.to_csv("llm_data/train.csv", index=False)
+# valid_df.to_csv("llm_data/validation.csv", index=False)
+# test_df.to_csv("llm_data/test.csv", index=False)
 
 print("Done")
 
